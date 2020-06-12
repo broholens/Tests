@@ -1,0 +1,48 @@
+```python
+>>> from pathlib import Path
+>>> p = Path('.')
+
+# 列举目录
+>>> [x for x in p.iterdir() if x.is_dir()]
+[WindowsPath('.idea'), WindowsPath('__pycache__')]
+
+# 列举文件
+>>> list(p.glob('**/*.py'))
+[WindowsPath('debugger.py'), WindowsPath('ssh_connection.py'), WindowsPath('util.py'), WindowsPath('__init__.py')]
+
+# 文件归属路径
+>>> p.cwd()
+WindowsPath('D:/ODAEDebugger/backend')
+
+# 文件绝对路径
+>>> p.resolve()
+WindowsPath('D:/ODAEDebugger/backend/util.py')
+
+# 文件/路径是否存在
+>>> p.exists()
+True
+
+# 是否是路径
+>>> p.is_file()
+True
+
+# 文件/路径stat
+>>> p.stat()
+os.stat_result(st_mode=33206, st_ino=13510798882280617, st_dev=1245727358, st_nlink=1, st_uid=0, st_gid=0, st_size=112, st_atime=1590832618, st_mtime=1590738985, st_ctime=1590738985)
+
+# 文件后缀与文件名
+>>> p.name
+'util.py'
+>>> p.suffix
+'.py'
+>>> p.stem
+'util'
+
+# 读写文件  函数内部已使用with open封装
+>>> p.read_text()
+"import json\n\n\ndef load_json_file(file_path):\n    with open(file_path, 'r')as f:\n        return json.load(f)"
+>>> p.write_text('aaa')
+3
+>>> p.read_text()
+'aaa'
+```
